@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
 /** 
  * @author Aditya Mahajan <aditya.mahajan@mcgill.ca>
  * @version 2013.10.06
@@ -85,7 +87,10 @@ public class Temperature {
           default:         throw new IllegalArgumentException();
       }
 
-      return convertedValue;
+      //Round the number to 1e-6 before returning it
+      BigDecimal bd = new BigDecimal(convertedValue);
+      bd = bd.setScale(6, BigDecimal.ROUND_HALF_UP);
+      return bd.doubleValue();
   }
 
   /** Format {@code Units}
