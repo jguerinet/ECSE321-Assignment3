@@ -56,8 +56,8 @@ public class TemperatureTest {
 		 //Note, I made doubles here instead of hardcoding the values to be able to quickly change them in case multiple values needed to be tested. 
 		 
 		 double roundValue = 78;
-		 double decimalValue = 98.5;
-		 double negativeValue = -25;
+		 double decimalValue = 98.546245;
+		 double negativeValue = -25.654654;
 		 
 		 /* Kelvin Testing */
 		 //Round Number
