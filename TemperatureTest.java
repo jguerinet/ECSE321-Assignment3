@@ -14,7 +14,7 @@ public class TemperatureTest {
 
 	//1. Check the getUnits() method
 	@Test
-	public void testGetUnits (){
+	public void testGetUnits(){
 		//For testing this method, we only need to test 1 unit, and both constructors.
 		/* REASONING:
 		 * The three units are all part of an enum, and dont actually change anything apart from 
@@ -34,11 +34,68 @@ public class TemperatureTest {
 		
 		//Second constructor, where we input a previously created temperature.
 		Temperature secondKelvinTemperature = new Temperature(kelvinTemperature);
-		assertTrue("Second Constrictor: getUnits = Kelvin", secondKelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));	
+		assertTrue("Second Constructor: getUnits = Kelvin", secondKelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));	
 	}
 
-	// @Test
-	// public void .... (){
-	//    ...
-	// }
+	//1. Check the getValue() method. 
+	 @Test
+	 public void testGetValue(){
+		 //For testing this method, we need to test all 3 units and both constructors. 
+		 /* REASONING: 
+		  * In both constructors, we are storing the actual value in Kelvins, regardless of the 
+		  * initial unit. When we call getValue(), this value is then re-converted to the original unit 
+		  * Therefore, we need to make sure that during the conversions to and from Kelvins the value was not 
+		  * compromised. 
+		  * The 2 constructors do not need to be tested here, since we can clearly see that the value is passed on 
+		  * from 1 constructor to another, therefore making the testing unnecessary. 
+		  * We are also going to test decimal values, since the value argument in the temperature constructor 
+		  * is a double, and we need to make sure that the same precision is kept during the conversions. 
+		  * Finally, we are also going to test 
+		  */
+		 
+		 //Note, I made doubles here instead of hardcoding the values to be able to quickly change them in case multiple values needed to be tested. 
+		 
+		 double roundValue = 78;
+		 double decimalValue = 98.5;
+		 double negativeValue = -25;
+		 
+		 /* Kelvin Testing */
+		 //Round Number
+		 Temperature roundKelvinTemperature = new Temperature(roundValue, Temperature.Units.KELVIN);
+		 assertTrue("getValue : Round Kelvin", roundKelvinTemperature.getValue() == roundValue);
+		 
+		 //Decimal Number
+		 Temperature decimalKelvinTemperature = new Temperature(decimalValue, Temperature.Units.KELVIN);
+		 assertTrue("getValue : Decimal Kelvin", decimalKelvinTemperature.getValue() == decimalValue);
+		 
+		 //Negative Number
+		 Temperature negativeKelvinTemperature = new Temperature(negativeValue, Temperature.Units.KELVIN);
+		 assertTrue("getValue : Negative Kelvin", negativeKelvinTemperature.getValue() == negativeValue);
+		 
+		 /*Celsius Testing*/
+		 //Round Number
+		 Temperature roundCelsiusTemperature = new Temperature(roundValue, Temperature.Units.CELSIUS);
+		 assertTrue("getValue : Round Celsius", roundCelsiusTemperature.getValue() == roundValue);
+		 
+		 //Decimal Number
+		 Temperature decimalCelsiusTemperature = new Temperature(decimalValue, Temperature.Units.CELSIUS);
+		 assertTrue("getValue : Decimal Celsius", decimalCelsiusTemperature.getValue() == decimalValue);
+		 
+		 //Negative Number
+		 Temperature negativeCelsiusTemperature = new Temperature(negativeValue, Temperature.Units.CELSIUS);
+		 assertTrue("getValue : Negative Celsius", negativeCelsiusTemperature.getValue() == negativeValue);
+		 
+		 /*Fahrenheit Testing*/
+		 //Round Number
+		 Temperature roundFahrenheitTemperature = new Temperature(roundValue, Temperature.Units.FAHRENHEIT);
+		 assertTrue("getValue : Round Fahrenheit", roundFahrenheitTemperature.getValue() == roundValue);
+		 
+		 //Decimal Number
+		 Temperature decimalFahrenheitTemperature = new Temperature(decimalValue, Temperature.Units.FAHRENHEIT);
+		 assertTrue("getValue : Decimal Fahrenheit", decimalFahrenheitTemperature.getValue() == decimalValue);
+		 
+		 //Negative Number
+		 Temperature negativeFahrenheitTemperature = new Temperature(negativeValue, Temperature.Units.FAHRENHEIT);
+		 assertTrue("getValue : Negative Fahrenheit", negativeFahrenheitTemperature.getValue() == negativeValue);
+	 }
 }
