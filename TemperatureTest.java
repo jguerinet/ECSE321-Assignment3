@@ -15,15 +15,14 @@ public class TemperatureTest {
 	//1. Check the getUnits() method
 	@Test
 	public void testGetUnits(){
-		//For testing this method, we only need to test 1 unit, and both constructors.
+		//For testing this method, we only need to test 1 unit, and 1 constructor.
 		/* REASONING:
 		 * The three units are all part of an enum, and dont actually change anything apart from 
 		 * the calculation during the conversion. Since we are only looking at getUnits(), which 
 		 * essentially is a getter method, as long as the argument to the constructor is correct, 
 		 * i.e. one of the enum values, the outcome will be the same for every unit. 
-		 * 
-		 * However, we should test the 2 different constructors to ensure that the units 
-		 * do not change when the second constructor calls upon the first constructor. 
+		 * We only need to test 1 constructor as well because the second constructor literally takes the units
+		 * of the first constructor and stores it. Nothing is done to the unit at any moment. 
 		 */
 		
 		//Here we will be testing in Kelvin (arbitrary choice)
@@ -31,16 +30,12 @@ public class TemperatureTest {
 		//First constructor, where we input the value and the units. 
 		Temperature kelvinTemperature = new Temperature(100, Temperature.Units.KELVIN);
 		assertTrue("First Constructor: getUnits = Kelvin", kelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));
-		
-		//Second constructor, where we input a previously created temperature.
-		Temperature secondKelvinTemperature = new Temperature(kelvinTemperature);
-		assertTrue("Second Constructor: getUnits = Kelvin", secondKelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));	
 	}
 
 	//1. Check the getValue() method. 
 	 @Test
 	 public void testGetValue(){
-		 //For testing this method, we need to test all 3 units and both constructors. 
+		 //For testing this method, we need to test all 3 units.
 		 /* REASONING: 
 		  * In both constructors, we are storing the actual value in Kelvins, regardless of the 
 		  * initial unit. When we call getValue(), this value is then re-converted to the original unit 
