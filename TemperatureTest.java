@@ -145,9 +145,9 @@ public class TemperatureTest {
 	  * These values are accurate up to 1e-6, with rounding done for the last number.  
 	  */
 	 
-	 //Test 1: Storing them in Celsius or Fahrenheit, getting them in Kelvin. 
-	 @Test
-	 public void testChangeUnitsInKelvin(){
+	//Test 1: Storing them in Celsius, getting them in Kelvin. 
+	@Test
+	public void testChangeUnitsFromCelsiusToKelvin(){
 		 //Temperature initially in Celsius
 		Temperature celsiusTemperature1 = new Temperature(values1[0], Temperature.Units.CELSIUS);
 		celsiusTemperature1.changeUnits(Temperature.Units.KELVIN);
@@ -163,7 +163,11 @@ public class TemperatureTest {
 		assertTrue("changeUnits : Celsius 2 -> Kelvin", celsiusTemperature2.getValue() == values2[2]);
 		assertTrue("changeUnits : Celsius 3 -> Kelvin", celsiusTemperature3.getValue() == values3[2]);
 		assertTrue("changeUnits : Celsius 4 -> Kelvin", celsiusTemperature4.getValue() == values4[2]);
-	
+	}
+
+	//Test 2: Storing them in Fahrenheit, getting them in Kelvin. 
+	@Test
+	public void testChangeUnitsFromFahrenheitToKelvin(){
 		//Temperature initially in Fahrenheit
 		Temperature fahrenheitTemperature1 = new Temperature(values1[1], Temperature.Units.FAHRENHEIT);
 		fahrenheitTemperature1.changeUnits(Temperature.Units.KELVIN);
@@ -179,11 +183,11 @@ public class TemperatureTest {
 		assertTrue("changeUnits : Fahrenheit 2 -> Kelvin", fahrenheitTemperature2.getValue() == values2[2]);
 		assertTrue("changeUnits : Fahrenheit 3 -> Kelvin", fahrenheitTemperature3.getValue() == values3[2]);
 		assertTrue("changeUnits : Fahrenheit 4 -> Kelvin", fahrenheitTemperature4.getValue() == values4[2]);
-	 }
-	 
-	 //Test 2: Storing them in Kelvin or Fahrenheit, getting them in Celsius
-	 @Test
-	 public void testChangeUnitsInCelsius(){
+	}
+	
+	//Test 3: Storing them in Kelvin, getting them in Celsius
+	@Test
+	public void testChangeUnitsFromKelvinToCelsius(){
 		 //Temperature initially in Kelvin
 		Temperature kelvinTemperature1 = new Temperature(values1[2], Temperature.Units.KELVIN);
 		kelvinTemperature1.changeUnits(Temperature.Units.CELSIUS);
@@ -199,7 +203,11 @@ public class TemperatureTest {
 		assertTrue("changeUnits : Kelvin 2 -> Celsius", kelvinTemperature2.getValue() == values2[0]);
 		assertTrue("changeUnits : Kelvin 3 -> Celsius", kelvinTemperature3.getValue() == values3[0]);
 		assertTrue("changeUnits : Kelvin 4 -> Celsius", kelvinTemperature4.getValue() == values4[0]);
-	 
+	}
+	
+	//Test 4: Storing them in Fahrenheit, getting them in Celsius
+	@Test
+	public void testChangeUnitsFromFahrenheitToCelsius(){
 		//Temperature initially in Fahrenheit
 		Temperature fahrenheitTemperature1 = new Temperature(values1[1], Temperature.Units.FAHRENHEIT);
 		fahrenheitTemperature1.changeUnits(Temperature.Units.CELSIUS);
@@ -215,27 +223,11 @@ public class TemperatureTest {
 		assertTrue("changeUnits : Fahrenheit 2 -> Celsius", fahrenheitTemperature2.getValue() == values2[0]);
 		assertTrue("changeUnits : Fahrenheit 3 -> Celsius", fahrenheitTemperature3.getValue() == values3[0]);
 		assertTrue("changeUnits : Fahrenheit 4 -> Celsius", fahrenheitTemperature4.getValue() == values4[0]);
-	 }
-	 
-	 //Test 3:Storing them in Celsius or Kelvin, getting them in Fahrenheit
-	 @Test
-	 public void testChangeUnitsInFahrenheit(){
-		 //Temperature initially in Celsius
-		Temperature celsiusTemperature1 = new Temperature(values1[0], Temperature.Units.CELSIUS);
-		celsiusTemperature1.changeUnits(Temperature.Units.FAHRENHEIT);
-		Temperature celsiusTemperature2 = new Temperature(values2[0], Temperature.Units.CELSIUS);
-		celsiusTemperature2.changeUnits(Temperature.Units.FAHRENHEIT);
-		Temperature celsiusTemperature3 = new Temperature(values3[0], Temperature.Units.CELSIUS);
-		celsiusTemperature3.changeUnits(Temperature.Units.FAHRENHEIT);
-		Temperature celsiusTemperature4 = new Temperature(values4[0], Temperature.Units.CELSIUS);
-		celsiusTemperature4.changeUnits(Temperature.Units.FAHRENHEIT);
-		
-		//Test Celsius -> Fahrenheit conversion.
-		assertTrue("changeUnits : Celsius 1 -> Fahrenheit", celsiusTemperature1.getValue() == values1[1]);
-		assertTrue("changeUnits : Celsius 2 -> Fahrenheit", celsiusTemperature2.getValue() == values2[1]);
-		assertTrue("changeUnits : Celsius 3 -> Fahrenheit", celsiusTemperature3.getValue() == values3[1]);
-		assertTrue("changeUnits : Celsius 4 -> Fahrenheit", celsiusTemperature4.getValue() == values4[1]);
-
+	}
+	
+	//Test 5:Storing them in Kelvin, getting them in Fahrenheit
+	@Test
+	public void testChangeUnitsFromKelvinToFahrenheit(){
 		//Temperature initially in Kelvin
 		Temperature kelvinTemperature1 = new Temperature(values1[2], Temperature.Units.KELVIN);
 		kelvinTemperature1.changeUnits(Temperature.Units.FAHRENHEIT);
@@ -251,5 +243,25 @@ public class TemperatureTest {
 		assertTrue("changeUnits : Kelvin 2 -> Fahrenheit", kelvinTemperature2.getValue() == values2[1]);
 		assertTrue("changeUnits : Kelvin 3 -> Fahrenheit", kelvinTemperature3.getValue() == values3[1]);
 		assertTrue("changeUnits : Kelvin 4 -> Fahrenheit", kelvinTemperature4.getValue() == values4[1]);
-	 }
+	}
+	
+	//Test 6:Storing them in Celsius, getting them in Fahrenheit
+	@Test
+	public void testChangeUnitsFromCelsiusToFahrenheit(){
+		 //Temperature initially in Celsius
+		Temperature celsiusTemperature1 = new Temperature(values1[0], Temperature.Units.CELSIUS);
+		celsiusTemperature1.changeUnits(Temperature.Units.FAHRENHEIT);
+		Temperature celsiusTemperature2 = new Temperature(values2[0], Temperature.Units.CELSIUS);
+		celsiusTemperature2.changeUnits(Temperature.Units.FAHRENHEIT);
+		Temperature celsiusTemperature3 = new Temperature(values3[0], Temperature.Units.CELSIUS);
+		celsiusTemperature3.changeUnits(Temperature.Units.FAHRENHEIT);
+		Temperature celsiusTemperature4 = new Temperature(values4[0], Temperature.Units.CELSIUS);
+		celsiusTemperature4.changeUnits(Temperature.Units.FAHRENHEIT);
+		
+		//Test Celsius -> Fahrenheit conversion.
+		assertTrue("changeUnits : Celsius 1 -> Fahrenheit", celsiusTemperature1.getValue() == values1[1]);
+		assertTrue("changeUnits : Celsius 2 -> Fahrenheit", celsiusTemperature2.getValue() == values2[1]);
+		assertTrue("changeUnits : Celsius 3 -> Fahrenheit", celsiusTemperature3.getValue() == values3[1]);
+		assertTrue("changeUnits : Celsius 4 -> Fahrenheit", celsiusTemperature4.getValue() == values4[1]);
+	}
 }
