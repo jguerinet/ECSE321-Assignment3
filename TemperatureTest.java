@@ -8,6 +8,38 @@ import org.junit.* ;
 import static org.junit.Assert.* ;
 
 public class TemperatureTest {
+	static double roundValue, negativeValue, decimalValue; 
+	static double[] values1, values2, values3, values4; 
+	 
+	//This is to set up the double arrays of values. The 0th position will have the celsius value, the 1st will have the
+	//Fahrenheit value,and the second will have the Kelvin value.
+	//It is also to set up the values used to test getValue().
+	@BeforeClass 
+	public static void setUpValues(){
+		roundValue = 78;
+		decimalValue = 98.546245;
+		negativeValue = -25.654654;
+		
+		values1 = new double[3];
+		values1[0] = 100; 
+		values1[1] = 212;
+		values1[2] = 373.15;
+		
+	 	values2 = new double[3];
+	 	values2[0] = -273.15; 
+	 	values2[1] = -459.67;
+	 	values2[2] = 0;
+		
+	 	values3 = new double[3];
+	 	values3[0] = 1.111111; 
+	 	values3[1] = 34;
+	 	values3[2] = 274.261111;
+		
+	 	values4 = new double[3];
+	 	values4[0] = 281.85; 
+	 	values4[1] = 539.33;
+	 	values4[2] = 555;
+	}
 	
 	/* Note : The test cases were chosen assuming that we were doing white-box testing, and therefore I could read and access the code. 
 	 * This is important because I have chosen to omit some trivial tests to keep my testing precise and useful.
@@ -40,32 +72,20 @@ public class TemperatureTest {
 	}
 
 	//1. Check the getValue() method. 
-	 @Test
-	 public void testGetValue(){
-		 //For testing this method, we need to test all 3 units.
-		 /* REASONING: 
-		  * In both constructors, we are storing the actual value in Kelvins, regardless of the 
-		  * initial unit. When we call getValue(), this value is then re-converted to the original unit 
-		  * Therefore, we need to make sure that during the conversions to and from Kelvins the value was not 
-		  * compromised. 
-		  * The 2 constructors do not need to be tested here, since we can clearly see that the value is passed on 
-		  * from 1 constructor to another, therefore making the testing unnecessary. 
-		  * We are also going to test decimal values, since the value argument in the temperature constructor 
-		  * is a double, and we need to make sure that the same precision is kept during the conversions. 
-		  * Finally, we are also going to test negative values for the Fahrenheit and Celsius units. We are assuming 
-		  * that the user will not input a number below absolute 0. 
-		  * We have not added this check in the code because the assignment strictly said to test only the unit conversion 
-		  * methods and the getter methods, and not to check the actual input the user is giving. It is for this reason we are not 
-		  * testing "null" as a unit to make sure the right exception is thrown. 
-		  */
-		 
-		 //Note, I made doubles here instead of hardcoding the values to be able to quickly change them in case multiple values needed to be tested. 
-		 
-		 double roundValue = 78;
-		 double decimalValue = 98.546245;
-		 double negativeValue = -25.654654;
-		 
-		 /* Kelvin Testing */
+	 //For testing this method, we need to test all 3 units.
+	 /* REASONING: 
+	  * In both constructors, we are storing the actual value in Kelvins, regardless of the 
+	  * initial unit. When we call getValue(), this value is then re-converted to the original unit 
+	  * Therefore, we need to make sure that during the conversions to and from Kelvins the value was not 
+	  * compromised. 
+	  * The 2 constructors do not need to be tested here, since we can clearly see that the value is passed on 
+	  * from 1 constructor to another, therefore making the testing unnecessary. 
+	  * We are also going to test decimal values, since the value argument in the temperature constructor 
+	  * is a double, and we need to make sure that the same precision is kept during the conversions. 
+	  */
+	
+	@Test
+	public void testGetValueKelvin(){	 
 		 //Round Number
 		 Temperature roundKelvinTemperature = new Temperature(roundValue, Temperature.Units.KELVIN);
 		 assertTrue("getValue : Round Kelvin", roundKelvinTemperature.getValue() == roundValue);
@@ -73,8 +93,10 @@ public class TemperatureTest {
 		 //Decimal Number
 		 Temperature decimalKelvinTemperature = new Temperature(decimalValue, Temperature.Units.KELVIN);
 		 assertTrue("getValue : Decimal Kelvin", decimalKelvinTemperature.getValue() == decimalValue);
-		 
-		 /*Celsius Testing*/
+	}
+	
+	@Test
+	public void testGetValueCelsius(){			 
 		 //Round Number
 		 Temperature roundCelsiusTemperature = new Temperature(roundValue, Temperature.Units.CELSIUS);
 		 assertTrue("getValue : Round Celsius", roundCelsiusTemperature.getValue() == roundValue);
@@ -86,8 +108,10 @@ public class TemperatureTest {
 		 //Negative Number
 		 Temperature negativeCelsiusTemperature = new Temperature(negativeValue, Temperature.Units.CELSIUS);
 		 assertTrue("getValue : Negative Celsius", negativeCelsiusTemperature.getValue() == negativeValue);
+	}
 		 
-		 /*Fahrenheit Testing*/
+	@Test
+	public void testGetValueFahrenheit(){		 
 		 //Round Number
 		 Temperature roundFahrenheitTemperature = new Temperature(roundValue, Temperature.Units.FAHRENHEIT);
 		 assertTrue("getValue : Round Fahrenheit", roundFahrenheitTemperature.getValue() == roundValue);
@@ -101,12 +125,12 @@ public class TemperatureTest {
 		 assertTrue("getValue : Negative Fahrenheit", negativeFahrenheitTemperature.getValue() == negativeValue);
 	 }
 	 
-	 //Testing values that are below absolute 0 
-	 @Test(expected = Exception.class)
-	 public void testBelowAbsoluteZero(){
+	//Testing values that are below absolute 0 
+	@Test(expected = Exception.class)
+	public void testBelowAbsoluteZero(){
 		 Temperature negativeTemperature = new Temperature(-800, Temperature.Units.FAHRENHEIT);
 		 fail();
-	 }
+	}
 	 
 	 //2. Check the changeUnits() function for all six possible conversions between Celsius, Fahrenheit, and Kelvin.
 	 
@@ -120,33 +144,6 @@ public class TemperatureTest {
 	  * (except negative kelvins, because we cannot be below absolute 0).
 	  * These values are accurate up to 1e-6, with rounding done for the last number.  
 	  */
-	 
-	 static double[] values1, values2, values3, values4; 
-	 
-	 //This is to set up the double arrays of values. The 0th position will have the celsius value, the 1st will have the
-	 //Fahrenheit value,and the second will have the Kelvin value. 
-	 @BeforeClass 
-	 public static void setUpValues(){
-		values1 = new double[3];
-		values1[0] = 100; 
-		values1[1] = 212;
-		values1[2] = 373.15;
-		
-	 	values2 = new double[3];
-	 	values2[0] = -273.15; 
-	 	values2[1] = -459.67;
-	 	values2[2] = 0;
-		
-	 	values3 = new double[3];
-	 	values3[0] = 1.111111; 
-	 	values3[1] = 34;
-	 	values3[2] = 274.261111;
-		
-	 	values4 = new double[3];
-	 	values4[0] = 281.85; 
-	 	values4[1] = 539.33;
-	 	values4[2] = 555;
-	 }
 	 
 	 //Test 1: Storing them in Celsius or Fahrenheit, getting them in Kelvin. 
 	 @Test
