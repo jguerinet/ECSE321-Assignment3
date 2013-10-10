@@ -52,7 +52,11 @@ public class TemperatureTest {
 		  * from 1 constructor to another, therefore making the testing unnecessary. 
 		  * We are also going to test decimal values, since the value argument in the temperature constructor 
 		  * is a double, and we need to make sure that the same precision is kept during the conversions. 
-		  * Finally, we are also going to test 
+		  * Finally, we are also going to test negative values for the Fahrenheit and Celsius units. We are assuming 
+		  * that the user will not input a number below absolute 0. 
+		  * We have not added this check in the code because the assignment strictly said to test only the unit conversion 
+		  * methods and the getter methods, and not to check the actual input the user is giving. It is for this reason we are not 
+		  * testing "null" as a unit to make sure the right exception is thrown. 
 		  */
 		 
 		 //Note, I made doubles here instead of hardcoding the values to be able to quickly change them in case multiple values needed to be tested. 
