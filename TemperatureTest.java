@@ -74,10 +74,6 @@ public class TemperatureTest {
 		 Temperature decimalKelvinTemperature = new Temperature(decimalValue, Temperature.Units.KELVIN);
 		 assertTrue("getValue : Decimal Kelvin", decimalKelvinTemperature.getValue() == decimalValue);
 		 
-		 //Negative Number
-		 Temperature negativeKelvinTemperature = new Temperature(negativeValue, Temperature.Units.KELVIN);
-		 assertTrue("getValue : Negative Kelvin", negativeKelvinTemperature.getValue() == negativeValue);
-		 
 		 /*Celsius Testing*/
 		 //Round Number
 		 Temperature roundCelsiusTemperature = new Temperature(roundValue, Temperature.Units.CELSIUS);
@@ -103,6 +99,13 @@ public class TemperatureTest {
 		 //Negative Number
 		 Temperature negativeFahrenheitTemperature = new Temperature(negativeValue, Temperature.Units.FAHRENHEIT);
 		 assertTrue("getValue : Negative Fahrenheit", negativeFahrenheitTemperature.getValue() == negativeValue);
+	 }
+	 
+	 //Testing values that are below absolute 0 
+	 @Test(expected = Exception.class)
+	 public void testBelowAbsoluteZero(){
+		 Temperature negativeTemperature = new Temperature(-800, Temperature.Units.FAHRENHEIT);
+		 fail();
 	 }
 	 
 	 //2. Check the changeUnits() function for all six possible conversions between Celsius, Fahrenheit, and Kelvin.
