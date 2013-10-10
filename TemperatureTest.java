@@ -8,6 +8,13 @@ import org.junit.* ;
 import static org.junit.Assert.* ;
 
 public class TemperatureTest {
+	
+	/* Note : The test cases were chosen assuming that we were doing white-box testing, and therefore I could read and access the code. 
+	 * This is important because I have chosen to omit some trivial tests to keep my testing precise and useful.
+	 * For example, for the testing of the units, if this were black box testing i would have tested every unit, but since I read through
+	 * the temperature class I clearly saw that the unit was directly stored and never tampered with, and therefore did not feel obliged
+	 * to test every different scenario. More details on the choosing of each test case are included in each method.
+	 */
 
 	// Add multiple tests to check all functions of
 	// {@Code Temperature} class.
@@ -17,19 +24,19 @@ public class TemperatureTest {
 	public void testGetUnits(){
 		//For testing this method, we only need to test 1 unit, and 1 constructor.
 		/* REASONING:
-		 * The three units are all part of an enum, and dont actually change anything apart from 
+		 * The three units are all part of an enum, and don't actually change anything apart from 
 		 * the calculation during the conversion. Since we are only looking at getUnits(), which 
 		 * essentially is a getter method, as long as the argument to the constructor is correct, 
 		 * i.e. one of the enum values, the outcome will be the same for every unit. 
 		 * We only need to test 1 constructor as well because the second constructor literally takes the units
-		 * of the first constructor and stores it. Nothing is done to the unit at any moment. 
+		 * of the first constructor and stores it. Nothing is done to the unit at any moment.
 		 */
 		
 		//Here we will be testing in Kelvin (arbitrary choice)
 		
 		//First constructor, where we input the value and the units. 
 		Temperature kelvinTemperature = new Temperature(100, Temperature.Units.KELVIN);
-		assertTrue("First Constructor: getUnits = Kelvin", kelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));
+		assertTrue("First Constructor: getUnits = Kelvin", kelvinTemperature.getUnits().equals(Temperature.Units.KELVIN));	
 	}
 
 	//1. Check the getValue() method. 
